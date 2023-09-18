@@ -1,7 +1,7 @@
 
 :root{
     --main-bg-color:#fafafa;
-    --main-bold-font:#545454;
+    --main-bold-font:#2a2a2a;
     --second-font:#a1a1a0;
     --sun-color:#fee67c;
     --rain-color-primary:#4dbfd9;
@@ -33,10 +33,10 @@
     outline:none;
     border-bottom: 0.5px solid var(--second-font);
     height: auto;
-    width:8ch;
+    width:3ch;
     margin-left:10px;
     margin-right:10px;
-    
+    text-align: center;
 
 }
 
@@ -52,7 +52,7 @@ input[type="text"]
 .main_content
 {
     display: grid;
-    grid-template-columns: 30% 30% 30%;
+    grid-template-columns: 33% 33% 33%;
     width:100%;
 }
 .main_animation
@@ -71,11 +71,57 @@ input[type="text"]
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 5rem;
+    font-weight: 100;
 }
 .extra_content
 {
     display:flex;
     flex-direction: column;
+    justify-content: center;
+    color:var(--second-font);
+    
+}
+.extra_content>div
+{
+    display:flex;
+    justify-content: center;
+    padding:10px 0px;
     align-items: center;
-    justify-content: space-between;
+}
+div>svg{
+    width:30px;
+    height: 30px;
+    margin-right:5px;
+}
+.main_animation
+{
+    color:var(--second-font);
+    
+}
+.main_animation>svg{
+    height: 6rem;
+    width:6rem;
+}
+.forecast_Container
+{
+    display:flex;
+    justify-content: space-evenly;
+    width: 100%;
+    padding:10px 0px;
+    color:var(--second-font);
+}
+.unit
+{
+    display:flex;
+    padding:10px;
+}
+.unit>button{
+    border:none;
+    background-color: inherit;
+    color:var(--second-font);
+}
+form>#submitInput
+{
+    display:none;
 }
