@@ -1,5 +1,5 @@
 
-function increasewidth(x)
+function increasewidth()
 {
     let search=document.getElementsByClassName("search")[0];
     let city=search.value;
@@ -102,7 +102,7 @@ async function onRender()
         farhenbtn.classList.add("unhighlight");
         celciusbtn.classList.add("highlight");
         celciusbtn.classList.remove("unhighlight");
-        console.log(celciusbtn.classList);
+        
     if(!window.localStorage.getItem("cityName"))
     {
         cityName=await getCityName();
@@ -131,7 +131,7 @@ function unitChange(degree)
         farhenbtn.classList.add("unhighlight");
         celciusbtn.classList.add("highlight");
         celciusbtn.classList.remove("unhighlight");
-        console.log(celciusbtn.classList);
+        
     }
     else
     {
