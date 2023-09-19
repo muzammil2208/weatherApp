@@ -32,11 +32,16 @@ async function getWeatherData(cityName)
         console.error("error while fetching weather for city"+cityName,error);
     }
 }
-
+function getDayName(date)
+{
+    const arr=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    let day=new Date(date);
+    return arr[day.getDay()];
+}
 
 async function updateAlldata(data,cityName)
 {
-    
+    let day0=data.forecast.forecastday[0];
     let day1=data.forecast.forecastday[1];
     let day2=data.forecast.forecastday[2];
     let day3=data.forecast.forecastday[3];
@@ -52,27 +57,52 @@ async function updateAlldata(data,cityName)
     const day2Field=document.getElementById("day2");
     const day3Field=document.getElementById("day3");
     const day4Field=document.getElementById("day4");
+    const day1img=document.getElementById("day1_img");
+    const day2img=document.getElementById("day2_img");
+    const day3img=document.getElementById("day3_img");
+    const day4img=document.getElementById("day4_img");
+    const maxmin=document.getElementsByClassName("main_temp_maxmin")[0];
+    const day2name=document.getElementById("day2_name");
+    const day3name=document.getElementById("day3_name");
+    const day4name=document.getElementById("day4_name");
+
     //updating all information
     searchInput.value=cityName;
     increasewidth();
-    weatherStatus.innerHTML="its "+data.current.condition.text;
+    weatherStatus.innerHTML=",its "+data.current.condition.text;
     raindetails.innerHTML=data.current.precip_mm+" mm";
     winddetails.innerHTML=data.current.wind_mph+ "kph";
     perdetails.innerHTML=data.current.humidity+"%";
     main_temp.innerHTML=data.current.temp_c;
     main_image.src=data.current.condition.icon;
+    maxmin.innerHTML=day0.day.maxtemp_c+"&deg / "+day0.day.mintemp_c+"&deg";
 
     //updating day information
-    day1Field.innerHTML=day1.day.maxtemp_c+" / "+day1.day.mintemp_c;
-    day2Field.innerHTML=day2.day.maxtemp_c+" / "+day2.day.mintemp_c;
-    day3Field.innerHTML=day3.day.maxtemp_c+" / "+day3.day.mintemp_c;
-    day4Field.innerHTML=day4.day.maxtemp_c+" / "+day4.day.mintemp_c;
+    day1Field.innerHTML=day1.day.maxtemp_c+"&deg / "+day1.day.mintemp_c+"&deg";
+    day2Field.innerHTML=day2.day.maxtemp_c+"&deg / "+day2.day.mintemp_c+"&deg";
+    day3Field.innerHTML=day3.day.maxtemp_c+"&deg / "+day3.day.mintemp_c+"&deg";
+    day4Field.innerHTML=day4.day.maxtemp_c+"&deg / "+day4.day.mintemp_c+"&deg";
+    day1img.src=day1.day.condition.icon;
+    day2img.src=day2.day.condition.icon;
+    day3img.src=day3.day.condition.icon;
+    day4img.src=day4.day.condition.icon;
+    day2name.innerHTML=getDayName(day2.date);
+    day3name.innerHTML=getDayName(day3.date);
+    day4name.innerHTML=getDayName(day4.date);
 }
 
 
 async function onRender()
 {
     let cityName="";
+    window.localStorage.setItem("temp_deg","c");
+    let farhenbtn=document.getElementById("farhenbtn");
+    let celciusbtn=document.getElementById("celciusbtn");
+        farhenbtn.classList.remove("highlight");
+        farhenbtn.classList.add("unhighlight");
+        celciusbtn.classList.add("highlight");
+        celciusbtn.classList.remove("unhighlight");
+        console.log(celciusbtn.classList);
     if(!window.localStorage.getItem("cityName"))
     {
         cityName=await getCityName();
@@ -88,4 +118,28 @@ async function onSubmit()
     const searchInput=document.getElementsByClassName("search")[0];
     window.localStorage.setItem("cityName",searchInput.value);
     
+}
+
+function unitChange(degree)
+{
+    let farhenbtn=document.getElementById("farhenbtn");
+    let celciusbtn=document.getElementById("celciusbtn");
+    if(degree==="c")
+    {
+        window.localStorage.setItem("temp_deg","c");
+        farhenbtn.classList.remove("highlight");
+        farhenbtn.classList.add("unhighlight");
+        celciusbtn.classList.add("highlight");
+        celciusbtn.classList.remove("unhighlight");
+        console.log(celciusbtn.classList);
+    }
+    else
+    {
+        window.localStorage.setItem("temp_deg","f");
+        farhenbtn.classList.add("highlight");
+        celciusbtn.classList.remove("highlight");
+        farhenbtn.classList.remove("unhighlight");
+        celciusbtn.classList.add("unhighlight");
+    }
+  
 }

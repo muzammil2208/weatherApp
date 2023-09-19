@@ -12,8 +12,7 @@
 {
     display:flex;
     justify-content: center;
-    align-items: center;
-    padding:10% 10%;
+    padding:20px 10%;
     flex-direction: column;
 }
 .searchBar{
@@ -33,7 +32,7 @@
     outline:none;
     border-bottom: 0.5px solid var(--second-font);
     height: auto;
-    width:3ch;
+    width:1ch;
     margin-left:10px;
     margin-right:10px;
     text-align: center;
@@ -54,6 +53,7 @@ input[type="text"]
     display: grid;
     grid-template-columns: 33% 33% 33%;
     width:100%;
+    height: auto;
 }
 .main_animation
 {
@@ -69,10 +69,21 @@ input[type="text"]
 .main_temp
 {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    font-size: 5rem;
-    font-weight: 100;
+    justify-content: center;
+    padding: 2rem 0;
+}
+.main_temp_content
+{
+    display:flex;
+    font-size:5rem;
+    
+    height: 12rem;
+}
+.main_temp_maxmin
+{
+    color:var(--second-font)
 }
 .extra_content
 {
@@ -86,8 +97,9 @@ input[type="text"]
 .extra_content>div
 {
     display:flex;
-    justify-content: center;
+    
     padding:10px 0px;
+    padding-left: 30%;
     align-items: center;
 }
 div>svg{
@@ -116,23 +128,43 @@ div>svg{
 {
     display:flex;
     padding:10px;
+    justify-content: center;
 }
 .unit>button{
     border:none;
     background-color: inherit;
-    color:var(--second-font);
 }
 form>#submitInput
 {
     display:none;
 }
-
 img
 {
     height: 10rem;
     width:10rem;
 }
-.main_temp>svg{
-    height: 60px;
-    width:20px
+.forecast_day_container
+{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+.forecast_day_container>p{
+    padding:0;
+    margin-bottom: 0;
+}
+.forecast_day_container>img
+{
+    width:40px;
+    height: 40px;
+}
+.highlight
+{
+    font-weight: bold;
+    color:var(--main-bold-font)
+}
+.unhighlight
+{
+    font-weight: 100;
+    color:var(--second-font);
 }
