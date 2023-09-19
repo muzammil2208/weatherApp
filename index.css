@@ -80,6 +80,7 @@ input[type="text"]
     flex-direction: column;
     justify-content: center;
     color:var(--second-font);
+    font-size:1.5rem;
     
 }
 .extra_content>div
@@ -124,4 +125,14 @@ div>svg{
 form>#submitInput
 {
     display:none;
+}
+
+img
+{
+    height: 10rem;
+    width:10rem;
+}
+.main_temp>svg{
+    height: 60px;
+    width:20px
 }
