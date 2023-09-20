@@ -168,8 +168,12 @@ img
     font-weight: 100;
     color:var(--second-font);
 }
+.extra_content_mobile
+{
+    display:none;
+}
 
-@media only screen and (max-width: 480px) 
+@media only screen and (max-width: 600px) 
 {
     .searchBar{
         display:flex;
@@ -215,4 +219,61 @@ img
     {
         color:var(--second-font);
     }
+    .extra_content
+    {
+        display:none;
+    }
+    .main_content
+    {
+        display:flex;
+        justify-content: space-between;
+        height: 12rem;
+    }
+    .main_temp_content{
+        font-size:4rem;
+        display:flex;
+        justify-content: center;
+    }
+    .main_temp_maxmin{
+        display:none;
+    }
+    .main_image
+    {
+        width:8rem;
+        height: 8rem;
+    }
+    .forecast_Container
+    {
+        flex-direction: column;
+        align-items: center;
+        padding:20px 5%;
+        
+    }
+    .forecast_day_container
+    {
+        display:grid;
+        grid-template-columns:33% 33% 33%;
+        width:100%;
+    }
+    
+    .extra_content_mobile
+    {
+        display:flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        padding:20px 5%;
+        border-bottom:1px solid var(--second-font);
+    }
+    .extra_content_mobile>div
+    {
+        display:flex;
+        width:100%;
+        justify-content: space-between;
+        margin:10px 0px;
+    }
+    .extra_information_title
+    {
+        font-size:1.2rem;
+    }
+    
 }

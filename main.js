@@ -51,6 +51,9 @@ async function updateAlldata(data,cityName)
     const raindetails=document.getElementsByClassName("rainChance")[0];
     const winddetails=document.getElementsByClassName("windSpeed")[0];
     const perdetails=document.getElementsByClassName("percipitation")[0];
+    const rain_details_mobile=document.getElementsByClassName("rain_details_mobile")[0];
+    const wind_details_mobile=document.getElementsByClassName("wind_details_mobile")[0];
+    const humidity_details_mobile=document.getElementsByClassName("humid_details_mobile")[0];
     const main_temp=document.getElementsByTagName("p")[0];
     const main_image=document.getElementsByClassName("main_image")[0];
     const day1Field=document.getElementById("day1");
@@ -73,7 +76,10 @@ async function updateAlldata(data,cityName)
     raindetails.innerHTML=data.current.precip_mm+" mm";
     winddetails.innerHTML=data.current.wind_mph+ "kph";
     perdetails.innerHTML=data.current.humidity+"%";
-    main_temp.innerHTML=data.current.temp_c;
+    rain_details_mobile.innerHTML=data.current.precip_mm+" mm";
+    wind_details_mobile.innerHTML=data.current.wind_mph+ " kph";
+    humidity_details_mobile.innerHTML=data.current.humidity+"%";
+    main_temp.innerHTML=data.current.temp_c+"&deg"+"C";
     main_image.src=data.current.condition.icon;
     maxmin.innerHTML=day0.day.maxtemp_c+"&deg / "+day0.day.mintemp_c+"&deg";
 
