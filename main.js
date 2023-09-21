@@ -79,15 +79,11 @@ async function updateAlldata(data,cityName)
     rain_details_mobile.innerHTML=data.current.precip_mm+" mm";
     wind_details_mobile.innerHTML=data.current.wind_mph+ " kph";
     humidity_details_mobile.innerHTML=data.current.humidity+"%";
-    main_temp.innerHTML=data.current.temp_c+"&deg"+"C";
     main_image.src=data.current.condition.icon;
-    maxmin.innerHTML=day0.day.maxtemp_c+"&deg / "+day0.day.mintemp_c+"&deg";
+   
 
     //updating day information
-    day1Field.innerHTML=day1.day.maxtemp_c+"&deg / "+day1.day.mintemp_c+"&deg";
-    day2Field.innerHTML=day2.day.maxtemp_c+"&deg / "+day2.day.mintemp_c+"&deg";
-    day3Field.innerHTML=day3.day.maxtemp_c+"&deg / "+day3.day.mintemp_c+"&deg";
-    day4Field.innerHTML=day4.day.maxtemp_c+"&deg / "+day4.day.mintemp_c+"&deg";
+    
     day1img.src=day1.day.condition.icon;
     day2img.src=day2.day.condition.icon;
     day3img.src=day3.day.condition.icon;
@@ -95,19 +91,72 @@ async function updateAlldata(data,cityName)
     day2name.innerHTML=getDayName(day2.date);
     day3name.innerHTML=getDayName(day3.date);
     day4name.innerHTML=getDayName(day4.date);
+
+    //displaying temperature based on unit 
+    let unit=window.localStorage.getItem("temp_deg");
+    
+    if(unit==='c')
+    {
+        main_temp.innerHTML=data.current.temp_c+"&deg"+"C";
+        maxmin.innerHTML=day0.day.maxtemp_c+"&deg / "+day0.day.mintemp_c+"&deg";
+        day1Field.innerHTML=day1.day.maxtemp_c+"&deg / "+day1.day.mintemp_c+"&deg";
+        day2Field.innerHTML=day2.day.maxtemp_c+"&deg / "+day2.day.mintemp_c+"&deg";
+        day3Field.innerHTML=day3.day.maxtemp_c+"&deg / "+day3.day.mintemp_c+"&deg";
+        day4Field.innerHTML=day4.day.maxtemp_c+"&deg / "+day4.day.mintemp_c+"&deg";
+    }
+    else
+    {
+        main_temp.innerHTML=data.current.temp_f+"&deg"+"F";
+        maxmin.innerHTML=day0.day.maxtemp_f+"&deg / "+day0.day.mintemp_f+"&deg";
+        day1Field.innerHTML=day1.day.maxtemp_f+"&deg / "+day1.day.mintemp_f+"&deg";
+        day2Field.innerHTML=day2.day.maxtemp_f+"&deg / "+day2.day.mintemp_f+"&deg";
+        day3Field.innerHTML=day3.day.maxtemp_f+"&deg / "+day3.day.mintemp_f+"&deg";
+        day4Field.innerHTML=day4.day.maxtemp_f+"&deg / "+day4.day.mintemp_f+"&deg";
+    }
+
 }
 
 
 async function onRender()
 {
-    let cityName="";
-    window.localStorage.setItem("temp_deg","c");
+    //code to mantain state of unit and implement changes when required
+    
     let farhenbtn=document.getElementById("farhenbtn");
     let celciusbtn=document.getElementById("celciusbtn");
+    let cityName="";
+    if(!window.localStorage.getItem("temp_deg"))
+    {
+        window.localStorage.setItem("temp_deg","c");
+        
         farhenbtn.classList.remove("highlight");
         farhenbtn.classList.add("unhighlight");
         celciusbtn.classList.add("highlight");
         celciusbtn.classList.remove("unhighlight");
+    }
+    else
+    {
+        let unit=window.localStorage.getItem("temp_deg");
+        if(unit==="c")
+        {
+           
+            farhenbtn.classList.remove("highlight");
+            farhenbtn.classList.add("unhighlight");
+            celciusbtn.classList.add("highlight");
+            celciusbtn.classList.remove("unhighlight");
+            
+            
+        }
+        else
+        {
+           
+            farhenbtn.classList.add("highlight");
+            celciusbtn.classList.remove("highlight");
+            farhenbtn.classList.remove("unhighlight");
+            celciusbtn.classList.add("unhighlight");
+           
+        }
+    }
+   
         
     if(!window.localStorage.getItem("cityName"))
     {
@@ -137,6 +186,7 @@ function unitChange(degree)
         farhenbtn.classList.add("unhighlight");
         celciusbtn.classList.add("highlight");
         celciusbtn.classList.remove("unhighlight");
+        onRender();
         
     }
     else
@@ -146,6 +196,7 @@ function unitChange(degree)
         celciusbtn.classList.remove("highlight");
         farhenbtn.classList.remove("unhighlight");
         celciusbtn.classList.add("unhighlight");
+        onRender();
     }
   
 }
