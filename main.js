@@ -166,6 +166,12 @@ async function onRender()
     cityName=window.localStorage.getItem("cityName");
     let data=await getWeatherData(cityName);
     await updateAlldata(data,cityName);
+
+    //setting default mode
+    if(!window.localStorage.getItem("mode"))
+    {
+        window.localStorage.setItem("mode","light");
+    }
 } 
 
 async function onSubmit()
@@ -199,4 +205,32 @@ function unitChange(degree)
         onRender();
     }
   
+}
+
+function modeChange()
+{
+    if(!window.localStorage.getItem("mode"))
+    {
+        window.localStorage.setItem("mode","light");
+    }
+    else
+    {
+        let mode=window.localStorage.getItem("mode");
+        let sun=document.getElementById("sun_icon");
+        let moon=document.getElementById("moon_icon");
+        if(mode==="light")
+        {
+            window.localStorage.setItem("mode","dark");
+            moon.style.display="flex";
+            sun.style.display="none";
+
+        }
+        else
+        {
+            window.localStorage.setItem("mode","light");
+            moon.style.display="none";
+            sun.style.display="flex";
+        }
+        
+    }
 }
