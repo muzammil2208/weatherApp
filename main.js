@@ -172,6 +172,35 @@ async function onRender()
     {
         window.localStorage.setItem("mode","light");
     }
+    else
+    {
+        let mode=window.localStorage.getItem("mode");
+        let sun=document.getElementById("sun_icon");
+        let moon=document.getElementById("moon_icon");
+        let root=document.querySelector(':root');
+        
+        if(mode==="light")
+        {
+            
+            
+            moon.style.display="none";
+            sun.style.display="flex";
+            root.style.setProperty("--main-bg-color","#fafafa");
+            root.style.setProperty("--main-bold-font","#2a2a2a");
+            root.style.setProperty("--second-bg-color","#e7e7e7")
+        }
+        else
+        {
+            
+            moon.style.display="flex";
+            sun.style.display="none";
+            root.style.setProperty("--main-bg-color","#2f2f2f");
+            root.style.setProperty("--main-bold-font","white");
+            root.style.setProperty("--second-bg-color","#464646")
+            
+        }
+        
+    }
 } 
 
 async function onSubmit()
@@ -218,11 +247,16 @@ function modeChange()
         let mode=window.localStorage.getItem("mode");
         let sun=document.getElementById("sun_icon");
         let moon=document.getElementById("moon_icon");
+        let root=document.querySelector(':root');
+        
         if(mode==="light")
         {
             window.localStorage.setItem("mode","dark");
             moon.style.display="flex";
             sun.style.display="none";
+            root.style.setProperty("--main-bg-color","#2f2f2f");
+            root.style.setProperty("--main-bold-font","white");
+            root.style.setProperty("--second-bg-color","#464646")
 
         }
         else
@@ -230,6 +264,10 @@ function modeChange()
             window.localStorage.setItem("mode","light");
             moon.style.display="none";
             sun.style.display="flex";
+            root.style.setProperty("--main-bg-color","#fafafa");
+            root.style.setProperty("--main-bold-font","#2a2a2a");
+            root.style.setProperty("--second-bg-color","#e7e7e7")
+            
         }
         
     }

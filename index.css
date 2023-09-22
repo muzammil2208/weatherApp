@@ -3,10 +3,10 @@
     --main-bg-color:#fafafa;
     --main-bold-font:#2a2a2a;
     --second-font:#a1a1a0;
-    --sun-color:#fee67c;
-    --rain-color-primary:#4dbfd9;
-    --rain-color-secondary:#49B5CE;
+    --second-bg-color:#e7e7e7;
     background-color:var(--main-bg-color);
+    -webkit-transition: background-color 500ms ease;
+  transition: background-color 500ms ease;
 }
 .main_container
 {
@@ -78,7 +78,7 @@ input[type="text"]
 {
     display:flex;
     font-size:5rem;
-    
+    color:var(--main-bold-font);
     height: 12rem;
 }
 .main_temp_maxmin
@@ -102,10 +102,15 @@ input[type="text"]
     padding-left: 30%;
     align-items: center;
 }
-div>svg{
+.extra_details{
     width:30px;
     height: 30px;
     margin-right:5px;
+    color:var(--main-bold-font);
+    
+}
+.extra_content_mobile{
+    color:var(--main-bold-font);
 }
 .main_animation
 {
@@ -226,7 +231,7 @@ img
     #cityNameForm
     {
         width:100%;
-        background:#e7e7e7;
+        background:var(--second-bg-color);
         border-radius: 50px;
         padding:10px;
         display:flex;
