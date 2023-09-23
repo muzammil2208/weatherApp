@@ -24,8 +24,16 @@ async function getWeatherData(cityName)
 {
     try{
         let response=await fetch("https://api.weatherapi.com/v1/forecast.json?key=84781dcc9be14da3ab555707231409&q="+cityName+"&days=5&aqi=no&alerts=no");
-        let data= await response.json();
-        return data;
+        if(response.status!=200)
+        {
+            return(false);
+        }
+        else
+        {
+            let data= await response.json();
+            return data;
+        }
+        
     }
     catch(error)
     {
@@ -165,7 +173,14 @@ async function onRender()
     }
     cityName=window.localStorage.getItem("cityName");
     let data=await getWeatherData(cityName);
-    await updateAlldata(data,cityName);
+    if(data===false)
+    {
+        alert("city name is not correct please enter correct city name");
+    }
+    else{
+        await updateAlldata(data,cityName);
+    }
+    
 
     //setting default mode
     if(!window.localStorage.getItem("mode"))
