@@ -23,9 +23,17 @@ async function getCityName() {
 async function getWeatherData(cityName)
 {
     try{
-        let response=await fetch("https://api.weatherapi.com/v1/forecast.json?key=84781dcc9be14da3ab555707231409&q="+cityName+"&days=5&aqi=no&alerts=no");
-        let data= await response.json();
-        return data;
+        let response=await fetch("http://api.weatherapi.com/v1/forecast.json?key=84781dcc9be14da3ab555707231409&q="+cityName+"&days=5&aqi=no&alerts=no");
+        if(response.status!=200)
+        {
+            return(false);
+        }
+        else
+        {
+            let data= await response.json();
+            return data;
+        }
+
     }
     catch(error)
     {
@@ -44,8 +52,7 @@ async function updateAlldata(data,cityName)
     let day0=data.forecast.forecastday[0];
     let day1=data.forecast.forecastday[1];
     let day2=data.forecast.forecastday[2];
-    let day3=data.forecast.forecastday[3];
-    let day4=data.forecast.forecastday[4];
+   
     const searchInput=document.getElementsByClassName("search")[0];
     const weatherStatus=document.getElementsByClassName("weather_status")[0];
     const raindetails=document.getElementsByClassName("rainChance")[0];
@@ -58,16 +65,13 @@ async function updateAlldata(data,cityName)
     const main_image=document.getElementsByClassName("main_image")[0];
     const day1Field=document.getElementById("day1");
     const day2Field=document.getElementById("day2");
-    const day3Field=document.getElementById("day3");
-    const day4Field=document.getElementById("day4");
+   
     const day1img=document.getElementById("day1_img");
     const day2img=document.getElementById("day2_img");
-    const day3img=document.getElementById("day3_img");
-    const day4img=document.getElementById("day4_img");
+    
     const maxmin=document.getElementsByClassName("main_temp_maxmin")[0];
     const day2name=document.getElementById("day2_name");
-    const day3name=document.getElementById("day3_name");
-    const day4name=document.getElementById("day4_name");
+   
 
     //updating all information
     searchInput.value=cityName;
@@ -86,11 +90,9 @@ async function updateAlldata(data,cityName)
     
     day1img.src=day1.day.condition.icon;
     day2img.src=day2.day.condition.icon;
-    day3img.src=day3.day.condition.icon;
-    day4img.src=day4.day.condition.icon;
+   
     day2name.innerHTML=getDayName(day2.date);
-    day3name.innerHTML=getDayName(day3.date);
-    day4name.innerHTML=getDayName(day4.date);
+   
 
     //displaying temperature based on unit 
     let unit=window.localStorage.getItem("temp_deg");
@@ -101,8 +103,7 @@ async function updateAlldata(data,cityName)
         maxmin.innerHTML=day0.day.maxtemp_c+"&deg / "+day0.day.mintemp_c+"&deg";
         day1Field.innerHTML=day1.day.maxtemp_c+"&deg / "+day1.day.mintemp_c+"&deg";
         day2Field.innerHTML=day2.day.maxtemp_c+"&deg / "+day2.day.mintemp_c+"&deg";
-        day3Field.innerHTML=day3.day.maxtemp_c+"&deg / "+day3.day.mintemp_c+"&deg";
-        day4Field.innerHTML=day4.day.maxtemp_c+"&deg / "+day4.day.mintemp_c+"&deg";
+       
     }
     else
     {
@@ -110,8 +111,7 @@ async function updateAlldata(data,cityName)
         maxmin.innerHTML=day0.day.maxtemp_f+"&deg / "+day0.day.mintemp_f+"&deg";
         day1Field.innerHTML=day1.day.maxtemp_f+"&deg / "+day1.day.mintemp_f+"&deg";
         day2Field.innerHTML=day2.day.maxtemp_f+"&deg / "+day2.day.mintemp_f+"&deg";
-        day3Field.innerHTML=day3.day.maxtemp_f+"&deg / "+day3.day.mintemp_f+"&deg";
-        day4Field.innerHTML=day4.day.maxtemp_f+"&deg / "+day4.day.mintemp_f+"&deg";
+       
     }
 
 }
@@ -165,7 +165,13 @@ async function onRender()
     }
     cityName=window.localStorage.getItem("cityName");
     let data=await getWeatherData(cityName);
-    await updateAlldata(data,cityName);
+    if(data===false)
+    {
+        alert("city name is not correct please enter correct city name");
+    }
+    else{
+        await updateAlldata(data,cityName);
+    }
 
     //setting default mode
     if(!window.localStorage.getItem("mode"))
