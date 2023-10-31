@@ -23,7 +23,7 @@ async function getCityName() {
 async function getWeatherData(cityName)
 {
     try{
-        let response=await fetch("http://api.weatherapi.com/v1/forecast.json?key=84781dcc9be14da3ab555707231409&q="+cityName+"&days=5&aqi=no&alerts=no");
+        let response=await fetch("https://api.weatherapi.com/v1/forecast.json?key=84781dcc9be14da3ab555707231409&q="+cityName+"&days=5&aqi=no&alerts=no");
         if(response.status!=200)
         {
             return(false);
